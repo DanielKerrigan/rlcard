@@ -25,6 +25,11 @@ register(
 )
 
 register(
+    env_id='kuhn-poker',
+    entry_point='rlcard.envs.kuhnpoker:KuhnPokerEnv',
+)
+
+register(
     env_id='no-limit-holdem',
     entry_point='rlcard.envs.nolimitholdem:NolimitholdemEnv',
 )
