@@ -62,7 +62,10 @@ class KuhnPokerEnv(Env):
         obs = np.zeros(9)
         obs[self.card2index[hand]] = 1
         obs[state['my_chips']+3] = 1
-        obs[state['all_chips'][1]+6] = 1
+
+        opponent_chips = sum(state['all_chips']) - state['my_chips']
+
+        obs[opponent_chips+6] = 1
         extracted_state['obs'] = obs
 
         if self.allow_raw_data:
