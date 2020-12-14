@@ -53,22 +53,22 @@ class LimitholdemEnv(Env):
         obs = np.zeros(228)
 
         # hole cards
-        obs[self.card2index[hand[0]] = 1
-        obs[self.card2index[hand[1]] = 1
+        obs[self.card2index[hand[0]]] = 1
+        obs[self.card2index[hand[1]]] = 1
 
         # flop
         if len(public_cards) >= 3:
-            obs[52 + self.card2index[public_cards[0]] = 1
-            obs[52 + self.card2index[public_cards[1]] = 1
-            obs[52 + self.card2index[public_cards[2]] = 1
+            obs[52 + self.card2index[public_cards[0]]] = 1
+            obs[52 + self.card2index[public_cards[1]]] = 1
+            obs[52 + self.card2index[public_cards[2]]] = 1
 
         # turn
         if len(public_cards) >= 4:
-            obs[104 + self.card2index[public_cards[3]]
+            obs[104 + self.card2index[public_cards[3]]] = 1
 
         # river
         if len(public_cards) >= 5:
-            obs[156 + self.card2index[public_cards[4]]
+            obs[156 + self.card2index[public_cards[4]]] = 1
 
         for i, num in enumerate(raise_nums):
             obs[208 + i * 5 + num] = 1
