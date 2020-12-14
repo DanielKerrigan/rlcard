@@ -17,7 +17,7 @@ class LimitholdemEnv(Env):
         self.game = Game()
         super().__init__(config)
         self.actions = ['call', 'raise', 'fold', 'check']
-        self.state_shape=[72]
+        self.state_shape=[228]
 
         with open(os.path.join(rlcard.__path__[0], 'games/limitholdem/card2index.json'), 'r') as file:
             self.card2index = json.load(file)
@@ -49,12 +49,29 @@ class LimitholdemEnv(Env):
         public_cards = state['public_cards']
         hand = state['hand']
         raise_nums = state['raise_nums']
-        cards = public_cards + hand
-        idx = [self.card2index[card] for card in cards]
-        obs = np.zeros(72)
-        obs[idx] = 1
+
+        obs = np.zeros(228)
+
+        # hole cards
+        obs[self.card2index[hand[0]] = 1
+        obs[self.card2index[hand[1]] = 1
+
+        # flop
+        if len(public_cards) >= 3:
+            obs[52 + self.card2index[public_cards[0]] = 1
+            obs[52 + self.card2index[public_cards[1]] = 1
+            obs[52 + self.card2index[public_cards[2]] = 1
+
+        # turn
+        if len(public_cards) >= 4:
+            obs[104 + self.card2index[public_cards[3]]
+
+        # river
+        if len(public_cards) >= 5:
+            obs[156 + self.card2index[public_cards[4]]
+
         for i, num in enumerate(raise_nums):
-            obs[52 + i * 5 + num] = 1
+            obs[208 + i * 5 + num] = 1
         extracted_state['obs'] = obs
 
         if self.allow_raw_data:

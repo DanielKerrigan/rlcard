@@ -56,18 +56,16 @@ def _print_state(state, action_record):
     for pair in _action_list:
         print('>> Player', pair[0], 'chooses', pair[1])
 
-    print('\n=============== Community Card ===============')
-    print_card(state['public_cards'])
+    if state['public_cards']:
+        print('\n=============== Community Card ===============')
+        print_card(state['public_cards'])
     print('===============   Your Hand    ===============')
     print_card(state['hand'])
     print('===============     Chips      ===============')
-    print('Yours:   ', end='')
-    for _ in range(state['my_chips']):
-        print('+', end='')
-    print('')
-    for i in range(len(state['all_chips'])):
-        for _ in range(state['all_chips'][i]):
-            print('+', end='')
+    print('Yours:     ', state['my_chips'])
+    total_chips = sum(state['all_chips'])
+    print('Opponent:  ', total_chips - state['my_chips'])
+    print('Total:     ', total_chips)
     print('\n=========== Actions You Can Choose ===========')
     print(', '.join([str(index) + ': ' + action for index, action in enumerate(state['legal_actions'])]))
     print('')
